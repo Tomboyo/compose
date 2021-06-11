@@ -15,7 +15,7 @@ end
 
 This is presented as a control-flow problem: how do you perform a sequence of operations, each building upon the last, such that each possible cause of error is _distinctly_ handled?
 
-The `with` expression is not intended to solve for the control-flow problem above. To the contrary, `with` only composes pattern matches together into one larger expression whose type signature is a union of the values produced by its generators. Since many Elixir functions return the same error patterns `:error` and `{:error, term}`, its common for a `with` to also type as `v | :error | {:error, term}`. Whether we use two generators or a million, a composition of patterns generally devolves into two cases: it worked, or it didn't. In many situations this boolean outcome is desirable, but not for the problem at hand.
+The `with` expression is not intended to solve for the control-flow problem above. To the contrary, `with` only composes pattern matches together into one larger expression whose type signature is a union of the values produced by its generators (plus or minus some mappings). Since many Elixir functions return the same error patterns `:error` and `{:error, term}`, its common for a `with` to also type as `v | :error | {:error, term}`. Whether we use two generators or a million, a composition of patterns generally devolves into two cases: it worked, or it didn't. In many situations this boolean outcome is desirable, but not for the problem at hand.
 
 Our `compose` macro is intended for the control-flow scenario. The following is a solution to the problem posed above:
 
